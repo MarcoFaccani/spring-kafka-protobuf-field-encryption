@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/descriptor.proto";
+
+option java_multiple_files = true;
+option java_package = "com.marcofaccani.grpc.server.v1";
+option java_outer_classname = "MyGrpcServer";
+
+option go_package = "github.com/marcofaccani/com-marcofaccani-grpc-server/clientLibraries/go;com-marcofaccani-grpc-server_v1";
+
+package customer.service;
+
+extend google.protobuf.FieldOptions {
+  bool encrypt = 50001;
+}
+
+service GrpcServerService {
+
+  //heath check of microservice
+  rpc GetServerStatus (google.protobuf.Empty) returns (ServerStatusReply) {
+    option (google.api.http) = {
+      get: "/service/customer/status"
+    };
+  }
+
+  rpc Greeting (GreetingRequest) returns (GreetingResponse) {
+    option (google.api.http) = {
+      post: "/service/greeting",
+      body: "*"
+    };
+  }
+
+}
+
+
+/* MESSAGES DEFINITIONS */
+message ServerStatusReply {
+  string service = 1;
+  ServerServiceStatus status = 2;
+}
+
+message GreetingRequest {
+  string firstname = 1;
+  string lastname = 2 [(encrypt) = true];
+}
+
+message GreetingResponse {
+  string message = 1;
+}
+
+/* ENUMS DEFINITIONS */
+enum ServerServiceStatus {
+  UP = 0;
+  DOWN = 1;
+}
+
+
+
+

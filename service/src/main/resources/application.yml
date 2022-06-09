@@ -1,0 +1,34 @@
+server:
+  port: 8089
+
+grpc:
+  server:
+    port: ${grpcServerPort:9091}
+  client:
+    local-grpc-server:
+      address: 'static://127.0.0.1:${grpcServerPort:9999}'
+      enableKeepAlive: true
+      keepAliveWithoutCalls: true
+      negotiationType: plaintext
+
+spring:
+  cloud:
+    stream:
+      bindings:
+        greetingProducer-out-0:
+          group: ${CONSUMER_GROUP_NAME:dummy-group}
+          destination: kafka-protobuf-topic
+          content-type: application/x-protobuf
+          producer:
+            use-native-encoding: true
+      kafka:
+        binder:
+          auto-create-topics: true
+          min-partition-count: 1
+          brokers: ${KAFKA_BROKERS:192.168.1.15:9092}
+          producer-properties:
+            key.serializer: org.apache.kafka.common.serialization.StringSerializer
+            value.serializer: com.marcofaccani.kafka.protobuf.field.encryption.channel.outbound.EncryptedProtobufSerializer
+            schema.registry.url: http://localhost:8081
+            value.subject.name.strategy: io.confluent.kafka.serializers.subject.TopicNameStrategy
+
