@@ -1,4 +1,3 @@
-
 ## Index
 1. Project Overview
 2. Project Explanation (code and so on)
@@ -21,9 +20,9 @@ If you're unfamiliar with Schema Registry, please feel free to check out this [i
 * gRPC
 
 ### Important Disclaimer
-Please note the project goal is not to be production ready but to showcase how to achieve a given result.
-For time constraint, I have decided to skip the unit and integration tests of this project.
-To find out what's my testing strategy and style, please refer to more complete projects on my GitHub Profile. <br>
+Please note the project goal is not to be production-ready but to showcase how to achieve a given result.
+For time constraints, I have decided to skip the unit and integration tests of this project.
+To find out what's my testing strategy and style, please refer to more complete projects on my GitHub Profile, such as [spring-cloud-stream-kafka-producer](https://github.com/MarcoFaccani/spring-cloud-stream-kafka-v3-producer) and [spring-cloud-stream-kafka-consumer](https://github.com/MarcoFaccani/spring-cloud-stream-kafka-v3-consumer). Also my [AWS Cloud projects](https://github.com/MarcoFaccani/spring-aws-s3) are fully tested. <br>
 Thank you.
 
 ## Project Explanation
